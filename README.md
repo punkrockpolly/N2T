@@ -1,1 +1,1 @@
-This is the HDL written as chapter 1 excercises in support of the book, The Elements of Computing Systems: Building a Modern Computer from First Principles by Noam Nisan and Shimon Schocken.
+Writing HDL for exercises in the book, The Elements of Computing Systems: Building a Modern Computer from First Principles by Noam Nisan and Shimon Schocken.s
