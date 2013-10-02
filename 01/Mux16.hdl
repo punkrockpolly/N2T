@@ -1,0 +1,96 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux16.hdl
+
+/**
+ * 16 bit multiplexor. If sel==1 then out=b else out=a.
+ */
+
+CHIP Mux16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Nand (a=sel, b=sel, out=a0);
+	Nand (a=a[0], b=a0, out=a1);
+	Nand (a=sel, b=b[0], out=a2);
+	Nand (a=a1, b=a2, out=out[0]);
+
+	Nand (a=sel, b=sel, out=b0);
+	Nand (a=a[1], b=b0, out=b1);
+	Nand (a=sel, b=b[1], out=b2);
+	Nand (a=b1, b=b2, out=out[1]);
+
+	Nand (a=sel, b=sel, out=c0);
+	Nand (a=a[2], b=c0, out=c1);
+	Nand (a=sel, b=b[2], out=c2);
+	Nand (a=c1, b=c2, out=out[2]);
+
+	Nand (a=sel, b=sel, out=d0);
+	Nand (a=a[3], b=d0, out=d1);
+	Nand (a=sel, b=b[3], out=d2);
+	Nand (a=d1, b=d2, out=out[3]);
+
+	Nand (a=sel, b=sel, out=e0);
+	Nand (a=a[4], b=e0, out=e1);
+	Nand (a=sel, b=b[4], out=e2);
+	Nand (a=e1, b=e2, out=out[4]);
+
+	Nand (a=sel, b=sel, out=f0);
+	Nand (a=a[5], b=f0, out=f1);
+	Nand (a=sel, b=b[5], out=f2);
+	Nand (a=f1, b=f2, out=out[5]);
+
+	Nand (a=sel, b=sel, out=g0);
+	Nand (a=a[6], b=g0, out=g1);
+	Nand (a=sel, b=b[6], out=g2);
+	Nand (a=g1, b=g2, out=out[6]);
+
+	Nand (a=sel, b=sel, out=h0);
+	Nand (a=a[7], b=h0, out=h1);
+	Nand (a=sel, b=b[7], out=h2);
+	Nand (a=h1, b=h2, out=out[7]);
+
+	Nand (a=sel, b=sel, out=i0);
+	Nand (a=a[8], b=i0, out=i1);
+	Nand (a=sel, b=b[8], out=i2);
+	Nand (a=i1, b=i2, out=out[8]);
+
+	Nand (a=sel, b=sel, out=j0);
+	Nand (a=a[9], b=j0, out=j1);
+	Nand (a=sel, b=b[9], out=j2);
+	Nand (a=j1, b=j2, out=out[9]);
+
+	Nand (a=sel, b=sel, out=k0);
+	Nand (a=a[10], b=k0, out=k1);
+	Nand (a=sel, b=b[10], out=k2);
+	Nand (a=k1, b=k2, out=out[10]);
+
+	Nand (a=sel, b=sel, out=l0);
+	Nand (a=a[11], b=l0, out=l1);
+	Nand (a=sel, b=b[11], out=l2);
+	Nand (a=l1, b=l2, out=out[11]);
+
+	Nand (a=sel, b=sel, out=m0);
+	Nand (a=a[12], b=m0, out=m1);
+	Nand (a=sel, b=b[12], out=m2);
+	Nand (a=m1, b=m2, out=out[12]);
+
+	Nand (a=sel, b=sel, out=n0);
+	Nand (a=a[13], b=n0, out=n1);
+	Nand (a=sel, b=b[13], out=n2);
+	Nand (a=n1, b=n2, out=out[13]);
+
+	Nand (a=sel, b=sel, out=o0);
+	Nand (a=a[14], b=o0, out=o1);
+	Nand (a=sel, b=b[14], out=o2);
+	Nand (a=o1, b=o2, out=out[14]);
+
+	Nand (a=sel, b=sel, out=p0);
+	Nand (a=a[15], b=p0, out=p1);
+	Nand (a=sel, b=b[15], out=p2);
+	Nand (a=p1, b=p2, out=out[15]);
+}
+
