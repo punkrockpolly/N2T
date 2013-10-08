@@ -72,7 +72,4 @@ CHIP ALU {
    Or(a=zr1, b=zr2, out=zr3);
    Not(in=zr3, out=zr);
 
-   // Final output
-   //And16(a=preout, b=preout, out=out);
-
 }
