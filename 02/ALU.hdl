@@ -46,4 +46,29 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+
+   // Zero the x & y inputs
+   Mux16(a=x, b=false, sel=zx, out=x1);
+   Mux16(a=y, b=false, sel=zy, out=y1);
+
+   // Negate the x & y inputs
+   Mux16(a=x1, b=x, b[15]=true, sel=nx, out=x2);
+   Mux16(a=y1, b=y, b[15]=true, sel=ny, out=y2);
+
+   // Perform f
+   Add16(a=x2, b=y2, out=out1);
+   And16(a=x2, b=y2, out=out2);
+   Mux16(a=out2, b=out1, sel=f, out=out3);
+   
+   // Negate the output and set ng flag
+   Mux16(a=out3, b=out3, b[15]=true, sel=no, out=preout, out[15]=ng, out[0..7]=w1, out[8..15]=w2);
+
+   // Set zr flag
+   Or8Way(in=w1, out=zr1);
+   Or8Way(in=w2, out=zr2);
+   Nand(a=zr1, b=zr2, out=zr);
+
+   // Final output
+   And16(a=preout, b=preout, out=out);
+
 }
