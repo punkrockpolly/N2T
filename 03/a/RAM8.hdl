@@ -16,4 +16,22 @@ CHIP RAM8 {
 
     PARTS:
     // Put your code here:
+
+    // Determine reading (load=0) vs writing (load=1)
+    Mux16(a=preout, b=in, sel=load, out=output):
+    
+    // Write to each of 8 Registers
+    Register(in=in1, load=load1, out=out1);
+    Register(in=in2, load=load2, out=out2);
+    Register(in=in3, load=load3, out=out3);
+    Register(in=in4, load=load4, out=out4);
+    Register(in=in5, load=load5, out=out5);
+    Register(in=in6, load=load6, out=out6);
+    Register(in=in7, load=load7, out=out7);
+    Register(in=in8, load=load8, out=out8);
+    
+    // Read from specified Register
+    DMux8Way(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, sel=address, out=preout)
+
+    Mux8Way16(a=out1, b=ou2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, sel=address, out=out, out=out1);
 }
