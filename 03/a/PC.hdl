@@ -17,6 +17,10 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+
+    //reset the counter, notreset=0 when reset=1
+    Not(in=reset, out=notreset)
+    Mux16(a=preout, b=notreset, sel=reset, out=);
 }
 
 
