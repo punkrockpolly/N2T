@@ -12,7 +12,7 @@
 // @3 D=M means D=Memory[3]
 
 	@i     // i refers to some mem. location
-	M=1    // i=1
+	M=1    // i=0
 
 (LOOP)
 // loop will increment i until R1 = i
@@ -22,7 +22,7 @@
 	@i
 	D=M    // D=i
 	@R1
-	D=D-A  // D=1-value of R0
+	D=D-M  // D=i-value of R0
 	@END
 	D;JGT  // If(i-R1) > 0 goto END
 	@R0
