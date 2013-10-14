@@ -19,15 +19,17 @@ CHIP PC {
     // Put your code here:
 
     // Reset the counter, zero=0 when reset=1
-    Not(in=reset, out=zero);
+    Mux16(a=preout, b=false, sel=reset, out=out1);
 
     // Increment
-    Add16(a=preout, b=inc, out=out1);
+    Add16(a=out1, b=false, b[0]=inc, out=out2);
 
+    // Load from input
+    Mux16(a=out2, b=in, sel=load, out=out3);
 
-    // select correct output
-    // sel 0: out=preout	sel 1: out=0 	sel 2: out=in 	sel 3 out=preout+1
-    Mux164Way(a=preout, b=zero, c=in, d=outinc, sel=reset, out=out, out=preout);
+    // Combine outs from control bits
+    Register(in=out3, load=true, out=preout, out=out);
+
 
 
 }
