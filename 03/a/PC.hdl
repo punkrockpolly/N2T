@@ -18,9 +18,18 @@ CHIP PC {
     PARTS:
     // Put your code here:
 
-    //reset the counter, notreset=0 when reset=1
-    Not(in=reset, out=notreset)
-    Mux16(a=preout, b=notreset, sel=reset, out=);
+    // Reset the counter, zero=0 when reset=1
+    Not(in=reset, out=zero);
+
+    // Increment
+    Add16(a=preout, b=inc, out=out1);
+
+
+    // select correct output
+    // sel 0: out=preout	sel 1: out=0 	sel 2: out=in 	sel 3 out=preout+1
+    Mux164Way(a=preout, b=zero, c=in, d=outinc, sel=reset, out=out, out=preout);
+
+
 }
 
 
