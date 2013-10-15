@@ -11,41 +11,59 @@
 // Put your code here.
 	@SCREEN
 	D=A
-	@addr
-	M=D
+	@pixel 
+	M=D    // D is current pixel (starts at SCREEN, then iterates each loop)
+	@8192  // number of pixels on a screen divided by 16-bit address (256 x 512 / 16)
+	D=A    // D = total number of pixels
+	@lastpixel
+	M=D    // assigns lastpixel with value of num pixels
 
 (LOOP)
 	@i     // i refers to some mem. location
 	M=0    // i=0
 	@KBD
 	D=M    // D=keyboard input
+	@color
+	M=0
 	@COLORLOOP
-	D;JGT  // If(keyboard input) goto COLORLOOP
+	D;JEQ  // if no keyboard input, then skip to COLORLOOP
+	@color
+	M=-1   // otherwise, change color to black (-1)
+
+(COLORLOOP)
+	@lastpixel
+	D=M    // D is the last pixel
+	@i
+	D=D-M  // D is lastpixel - iteration
+	@LOOP
+	D;JLE  // If(run out of pixels): < = 0 goto LOOP		
+	
+	@i
+	M=M+1  // i=i+1 - iterates each loop
+	D=M
+	@pixel
+	M=M+1  // iterates pixel
+
+	@color
+	D=M
+	@WHITE
+	D;JEQ  // If color is white, jump to WHITE
+	@BLACK
+	D;JNE  // otherwise, jump to BLACK
+
+(BLACK)
+	@pixel
+	D=M    // D is current pixel (starts at SCREEN, then iterates each loop)
+	A=D    // address = D
+	M=-1   // sets current address equal to -1 (black)
 	@LOOP
 	0;JMP  // Goto LOOP
 
-(COLORLOOP)	
-	@i
-	D=M    // D=i
-	@8192  // number of pixels on a screen divided by 16-bit address (256 x 512 / 16)
-	D=D-A  // D=i-number of pixels
-	@LOOP
-	D;JGT  // If(i-R1) > 0 goto LOOP	
-	@SCREEN
-	D=A
-	@i
-	D=D+M
-	@addr
-	A=M
-	M=D
-	M=-1   // Color each pixel black
-	
-	@i
-	M=M+1  // i=i+1 - iterate during keyboard input
-	@KBD
-	D=M    // D=keyboard input
-	@COLORLOOP
-	D;JGT  // If(keyboard input) goto COLORLOOP
-	
+(WHITE)
+	@pixel
+	D=M    // D is current pixel (starts at SCREEN, then iterates each loop)
+	A=D    // address = D
+	M=-1   // sets current address equal to 0 (white)
 	@LOOP
 	0;JMP  // Goto LOOP
+
