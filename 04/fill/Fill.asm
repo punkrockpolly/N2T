@@ -9,36 +9,43 @@
 // program clears the screen, i.e. writes "white" in every pixel.
 
 // Put your code here.
+	@SCREEN
+	D=A
+	@addr
+	M=D
 
 (LOOP)
 	@i     // i refers to some mem. location
 	M=0    // i=0
 	@KBD
 	D=M    // D=keyboard input
-	@LOOP2
-	D;JGT  // If(keyboard input) goto LOOP2
+	@COLORLOOP
+	D;JGT  // If(keyboard input) goto COLORLOOP
 	@LOOP
 	0;JMP  // Goto LOOP
 
-(LOOP2)	
+(COLORLOOP)	
 	@i
 	D=M    // D=i
 	@8192  // number of pixels on a screen divided by 16-bit address (256 x 512 / 16)
 	D=D-A  // D=i-number of pixels
 	@LOOP
 	D;JGT  // If(i-R1) > 0 goto LOOP	
-	@i
-	D=M
 	@SCREEN
-	A=D+M  // Offset screen pixel by i
-	A=-1   // Color each pixel black
+	D=A
 	@i
-	M=M+1  // i=i+1
+	D=D+M
+	@addr
+	A=M
+	M=D
+	M=-1   // Color each pixel black
+	
+	@i
+	M=M+1  // i=i+1 - iterate during keyboard input
 	@KBD
 	D=M    // D=keyboard input
-	@LOOP2
-	D;JGT  // If(keyboard input) goto LOOP2
+	@COLORLOOP
+	D;JGT  // If(keyboard input) goto COLORLOOP
 	
 	@LOOP
 	0;JMP  // Goto LOOP
-	
