@@ -10,27 +10,35 @@
 
 // Put your code here.
 
-	@i     // i refers to some mem. location
-	M=1    // i=1
-
 (LOOP)
-	@KBM
+	@i     // i refers to some mem. location
+	M=0    // i=0
+	@KBD
 	D=M    // D=keyboard input
 	@LOOP2
 	D;JGT  // If(keyboard input) goto LOOP2
+	@LOOP
+	0;JMP  // Goto LOOP
 
-(LOOP2)
+(LOOP2)	
 	@i
 	D=M    // D=i
-	@pixels // number of pixels on a screen (256x512)
-	A=131072
-	@pixels
+	@8192  // number of pixels on a screen divided by 16-bit address (256 x 512 / 16)
 	D=D-A  // D=i-number of pixels
 	@LOOP
-	D;JGT  // If(i-R1) > 0 goto LOOP
+	D;JGT  // If(i-R1) > 0 goto LOOP	
+	@i
+	D=M
 	@SCREEN
-	M=i    // Color each pixel black
+	A=D+M  // Offset screen pixel by i
+	A=-1   // Color each pixel black
 	@i
 	M=M+1  // i=i+1
+	@KBD
+	D=M    // D=keyboard input
 	@LOOP2
-	0;JMP  // Goto LOOP2
+	D;JGT  // If(keyboard input) goto LOOP2
+	
+	@LOOP
+	0;JMP  // Goto LOOP
+	
