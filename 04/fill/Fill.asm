@@ -9,3 +9,18 @@
 // program clears the screen, i.e. writes "white" in every pixel.
 
 // Put your code here.
+
+	@i     // i refers to some mem. location
+	M=1    // i=0
+
+(LOOP)
+	@i
+	D=M    // D=i
+	@KBM
+	D=M    // D=keyboard input
+
+	@SCREEN
+
+
+	@LOOP
+	0;JMP  // Goto LOOP

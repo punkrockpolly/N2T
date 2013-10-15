@@ -24,7 +24,7 @@
 	@i
 	D=M    // D=i
 	@R1
-	D=D-M  // D=i-value of R0
+	D=D-M  // D=i-value of R1
 	@END
 	D;JGT  // If(i-R1) > 0 goto END
 	@R0
