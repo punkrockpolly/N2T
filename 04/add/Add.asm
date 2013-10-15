@@ -7,7 +7,7 @@
 
 // Put your code here.
 
-	@1     // i refers to some mem. location
+	@i     // i refers to some mem. location
 	M=1    // i=1
 	@sum   // sum refers to some mem. location
 	M=0    // sum=0
@@ -20,9 +20,9 @@
 	@END
 	D;JGT  // If(i-100) > 0 goto END
 	@i
-	D=M    // D=1
+	D=M    // D=i
 	@sum
-	M=D+M  // sum=sum+1
+	M=D+M  // sum=sum+i
 	@i
 	M=M+1  // i=i+1
 	@LOOP
