@@ -11,16 +11,26 @@
 // Put your code here.
 
 	@i     // i refers to some mem. location
-	M=1    // i=0
+	M=1    // i=1
 
 (LOOP)
-	@i
-	D=M    // D=i
 	@KBM
 	D=M    // D=keyboard input
+	@LOOP2
+	D;JGT  // If(keyboard input) goto LOOP2
 
-	@SCREEN
-
-
+(LOOP2)
+	@i
+	D=M    // D=i
+	@pixels // number of pixels on a screen (256x512)
+	A=131072
+	@pixels
+	D=D-A  // D=i-number of pixels
 	@LOOP
-	0;JMP  // Goto LOOP
+	D;JGT  // If(i-R1) > 0 goto LOOP
+	@SCREEN
+	M=i    // Color each pixel black
+	@i
+	M=M+1  // i=i+1
+	@LOOP2
+	0;JMP  // Goto LOOP2
