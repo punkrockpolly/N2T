@@ -12,7 +12,7 @@
 // @3 D=M means D=Memory[3]
 
 	@i     // i refers to some mem. location
-	M=1    // i=0
+	M=1    // i=1
 	@R2
 	M=0    //R2=0
 
